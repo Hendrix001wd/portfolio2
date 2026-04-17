@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Peter Ade — Business Systems Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#FAFAF8;--surface:#F4F2EF;--border:#E2E0DB;--text:#1A1917;--muted:#6B6964;--hint:#A8A5A0;
+  --accent:#1A1917;--tag-bg:#EDEBE7;--tag-text:#4A4844;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#111110;--surface:#1C1B19;--border:#2E2D2A;--text:#F0EDE6;--muted:#8A8780;--hint:#4A4944;
+  --accent:#F0EDE6;--tag-bg:#242320;--tag-text:#8A8780;
+}}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Geist',system-ui,sans-serif;font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+header{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 40px}
+nav{max-width:900px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-name{font-family:'Instrument Serif',serif;font-size:17px;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;letter-spacing:0.02em;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-size:13px;color:var(--text);text-decoration:none;border:1px solid var(--border);padding:7px 18px;transition:all 0.2s}
+.nav-cta:hover{background:var(--text);color:var(--bg)}
+
+/* LAYOUT */
+.wrap{max-width:900px;margin:0 auto;padding:0 40px}
+
+/* HERO */
+#hero{padding:100px 40px 80px;max-width:900px;margin:0 auto}
+.hero-tag{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:24px;display:flex;align-items:center;gap:10px}
+.hero-tag::before{content:'';display:block;width:24px;height:1px;background:var(--muted)}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(42px,6vw,72px);font-weight:400;line-height:1.0;letter-spacing:-0.02em;margin-bottom:28px;color:var(--text)}
+h1 em{font-style:italic;color:var(--muted)}
+.hero-bio{font-size:16px;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:48px;font-weight:300}
+.hero-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-block;font-size:13px;letter-spacing:0.05em;text-decoration:none;padding:11px 28px;transition:all 0.2s;font-weight:400}
+.btn-solid{background:var(--text);color:var(--bg)}
+.btn-solid:hover{opacity:0.85}
+.btn-outline{border:1px solid var(--border);color:var(--text)}
+.btn-outline:hover{background:var(--surface)}
+.hero-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px}
+.chip{font-size:12px;letter-spacing:0.06em;padding:5px 14px;background:var(--tag-bg);color:var(--tag-text);border-radius:2px}
+
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:0}
+
+/* SECTIONS */
+section{padding:80px 0}
+.section-label{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--hint);margin-bottom:48px;display:block}
+h2{font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,42px);font-weight:400;line-height:1.1;margin-bottom:8px;letter-spacing:-0.01em}
+.section-sub{color:var(--muted);font-size:15px;margin-bottom:48px;font-weight:300;max-width:500px}
+
+/* STATS ROW */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);margin:60px 0;border:1px solid var(--border)}
+.stat{background:var(--bg);padding:28px 24px}
+.stat-n{font-family:'Instrument Serif',serif;font-size:36px;color:var(--text);display:block;line-height:1}
+.stat-l{font-size:12px;color:var(--muted);margin-top:6px;display:block;letter-spacing:0.05em}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{padding:32px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:200px 1fr;gap:40px}
+.exp-item:first-child{border-top:1px solid var(--border)}
+.exp-meta{padding-top:4px}
+.exp-company{font-size:13px;font-weight:500;color:var(--text);display:block;margin-bottom:4px}
+.exp-period{font-size:12px;color:var(--hint);display:block;margin-bottom:8px}
+.exp-loc{font-size:12px;color:var(--hint)}
+.exp-role{font-size:17px;font-weight:500;color:var(--text);margin-bottom:10px;line-height:1.3}
+.exp-desc{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:16px;font-weight:300}
+.exp-tags{display:flex;gap:6px;flex-wrap:wrap}
+.exp-tag{font-size:11px;padding:3px 10px;background:var(--tag-bg);color:var(--tag-text);letter-spacing:0.04em}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border)}
+.proj-card{background:var(--bg);padding:36px 32px;transition:background 0.2s}
+.proj-card:hover{background:var(--surface)}
+.proj-sector{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--hint);margin-bottom:14px}
+.proj-title{font-family:'Instrument Serif',serif;font-size:20px;margin-bottom:10px;line-height:1.2}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:20px}
+.proj-tools{display:flex;gap:6px;flex-wrap:wrap}
+.proj-tool{font-size:11px;padding:2px 8px;border:1px solid var(--border);color:var(--hint)}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.skill-block{}
+.skill-category{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--hint);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.skill-list{display:flex;flex-direction:column;gap:8px}
+.skill-item{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.skill-item::before{content:'';display:block;width:3px;height:3px;background:var(--hint);border-radius:50%;flex-shrink:0}
+
+/* PROFILE LINKS */
+.links-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.link-card{border:1px solid var(--border);padding:24px 28px;text-decoration:none;display:block;transition:all 0.2s;background:var(--bg)}
+.link-card:hover{background:var(--surface);border-color:var(--text)}
+.link-card-label{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--hint);display:block;margin-bottom:8px}
+.link-card-title{font-size:15px;color:var(--text);font-weight:500;display:block;margin-bottom:4px}
+.link-card-sub{font-size:12px;color:var(--muted)}
+.link-arrow{font-size:14px;color:var(--hint);float:right;margin-top:-20px}
+
+/* AVAILABILITY */
+.avail-box{border:1px solid var(--border);padding:48px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.avail-dot{display:inline-block;width:8px;height:8px;background:#4CAF50;border-radius:50%;margin-right:8px;vertical-align:middle}
+.avail-title{font-family:'Instrument Serif',serif;font-size:28px;margin-bottom:10px}
+.avail-sub{font-size:14px;color:var(--muted);max-width:440px;line-height:1.7}
+.avail-actions{display:flex;flex-direction:column;gap:12px;min-width:200px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:40px 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-left{font-size:13px;color:var(--muted)}
+.footer-right{font-size:12px;color:var(--hint);letter-spacing:0.05em}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  header,#hero,.wrap{padding-left:20px;padding-right:20px}
+  #hero{padding:60px 20px 60px}
+  .nav-links{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .exp-item{grid-template-columns:1fr}
+  .exp-meta{padding-top:0;padding-bottom:0}
+  .projects-grid,.skills-grid,.links-grid{grid-template-columns:1fr}
+  .avail-box{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#" class="nav-name">Peter Ade</a>
+    <ul class="nav-links">
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#profiles">Profiles</a></li>
+    </ul>
+    <a href="mailto:peterola994@gmail.com" class="nav-cta">Get in touch</a>
+  </nav>
+</header>
+
+<div id="hero">
+  <div class="hero-tag">Business Systems Analyst &amp; IT Business Analyst</div>
+  <h1>Peter Ade<br/><em>Systems. Data.<br/>Delivery.</em></h1>
+  <p class="hero-bio">I help organisations get more from their enterprise systems. From NHS workforce platforms and Lloyds mortgage operations to Yardi real estate and ERP rollouts, I sit between the business and the technology and make sure they work together.</p>
+  <div class="hero-row">
+    <a href="mailto:peterola994@gmail.com" class="btn btn-solid">Contact me</a>
+    <a href="#experience" class="btn btn-outline">View experience</a>
+  </div>
+  <div class="hero-chips">
+    <span class="chip">Oracle HRMS</span>
+    <span class="chip">Dynamics 365</span>
+    <span class="chip">Yardi</span>
+    <span class="chip">Workday</span>
+    <span class="chip">SAP</span>
+    <span class="chip">Power BI</span>
+    <span class="chip">SQL</span>
+    <span class="chip">UAT</span>
+    <span class="chip">Agile</span>
+    <span class="chip">ESR</span>
+  </div>
+</div>
+
+<hr/>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><span class="stat-n">6+</span><span class="stat-l">Years experience</span></div>
+    <div class="stat"><span class="stat-n">5</span><span class="stat-l">Sectors covered</span></div>
+    <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Enterprise platforms</span></div>
+    <div class="stat"><span class="stat-n">UK</span><span class="stat-l">Based &amp; eligible</span></div>
+  </div>
+</div>
+
+<hr/>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <span class="section-label">Experience</span>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Watkins Jones Group</span>
+          <span class="exp-period">Jul 2024 &ndash; Present</span>
+          <span class="exp-loc">Sheffield, UK</span>
+        </div>
+        <div>
+          <div class="exp-role">Business Systems Analyst</div>
+          <p class="exp-desc">Supporting enterprise systems across a large property and construction group. Designed process workflows, introduced structured SOPs that reduced new staff ramp-up time, and led incident pattern analysis that cut avoidable support tickets. Supported group-wide ERP enhancements, integrations and data migrations impacting both internal teams and customer-facing operations.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">ERP</span>
+            <span class="exp-tag">Process Mapping</span>
+            <span class="exp-tag">SOPs</span>
+            <span class="exp-tag">Data Migration</span>
+            <span class="exp-tag">Incident Analysis</span>
+            <span class="exp-tag">Stakeholder Management</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Lloyds Banking Group</span>
+          <span class="exp-period">Jun 2023 &ndash; Jul 2024</span>
+          <span class="exp-loc">Sheffield, UK</span>
+        </div>
+        <div>
+          <div class="exp-role">Senior Operations Analyst — Mortgages</div>
+          <p class="exp-desc">Worked in a regulated financial services environment supporting mortgage operations. Redesigned workflows used across multiple mortgage teams, improving processing consistency and compliance reporting quality. Enhanced forecasting accuracy through improved data inputs and reporting structures used in planning cycles. Provided SME support through system changes, policy updates and operational rollouts.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Mortgage Operations</span>
+            <span class="exp-tag">Financial Services</span>
+            <span class="exp-tag">Workflow Design</span>
+            <span class="exp-tag">Compliance Reporting</span>
+            <span class="exp-tag">Regulated Environment</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Sheffield Teaching Hospital NHS</span>
+          <span class="exp-period">Jun 2022 &ndash; Jul 2023</span>
+          <span class="exp-loc">Sheffield, UK</span>
+        </div>
+        <div>
+          <div class="exp-role">HR Systems Support Analyst</div>
+          <p class="exp-desc">Supported HR and workforce systems across a large NHS trust. Created user guides that measurably improved first-time resolution rates and reduced reliance on system administrators. Analysed HR operational data and user feedback to surface trends and deliver actionable insights. Contributed to compliance and audit readiness improvements within workforce systems including ESR.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">ESR</span>
+            <span class="exp-tag">NHS Systems</span>
+            <span class="exp-tag">HRIS</span>
+            <span class="exp-tag">Training & Guides</span>
+            <span class="exp-tag">Data Analysis</span>
+            <span class="exp-tag">Audit Readiness</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Campala Group</span>
+          <span class="exp-period">Jan 2021 &ndash; Aug 2021</span>
+          <span class="exp-loc">Dubai, UAE</span>
+        </div>
+        <div>
+          <div class="exp-role">Business Systems &amp; Data Analyst</div>
+          <p class="exp-desc">Supported digital platforms and high-volume operations across product, engineering and customer teams. Ensured stable system performance during peak periods, assisted ERP integrations and data migrations, and maintained system documentation and SOPs supporting compliance and onboarding.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">ERP Integration</span>
+            <span class="exp-tag">Yardi</span>
+            <span class="exp-tag">Real Estate Tech</span>
+            <span class="exp-tag">Data Validation</span>
+            <span class="exp-tag">Documentation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <span class="exp-company">Amazon</span>
+          <span class="exp-period">Feb 2022 &ndash; Apr 2022</span>
+          <span class="exp-loc">UK</span>
+        </div>
+        <div>
+          <div class="exp-role">Senior CRM Analyst</div>
+          <p class="exp-desc">CRM data analysis and customer relationship management operations within a high-volume logistics and fulfilment environment.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">CRM</span>
+            <span class="exp-tag">Data Analysis</span>
+            <span class="exp-tag">Operations</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <span class="section-label">Project Highlights</span>
+    <h2>Work that delivered</h2>
+    <p class="section-sub">A selection of impactful work across sectors. Available to walk through any of these on a call.</p>
+    <div class="projects-grid">
+
+      <div class="proj-card">
+        <div class="proj-sector">Financial Services</div>
+        <div class="proj-title">Mortgage Workflow Redesign — Lloyds Banking Group</div>
+        <p class="proj-desc">End-to-end redesign of mortgage operations workflows across multiple teams. Reduced processing inconsistencies and improved turnaround time for customer cases in a regulated FCA environment.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">Process Mapping</span>
+          <span class="proj-tool">Visio</span>
+          <span class="proj-tool">Compliance</span>
+          <span class="proj-tool">Excel</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-sector">Healthcare / NHS</div>
+        <div class="proj-title">ESR & Workforce System Support — Sheffield NHS Trust</div>
+        <p class="proj-desc">Delivered ESR administration, training guides and data quality improvement across a large NHS trust. Improved first-time resolution rates and reduced escalations to system admins through user-focused documentation.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">ESR</span>
+          <span class="proj-tool">HRIS</span>
+          <span class="proj-tool">Oracle HRMS</span>
+          <span class="proj-tool">Training</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-sector">Real Estate Technology</div>
+        <div class="proj-title">Yardi Platform Support & Data Migration — Campala Group</div>
+        <p class="proj-desc">Supported Yardi-based real estate operations in a high-volume UAE environment. Led data migration validation, integration support and configuration documentation across property management workflows.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">Yardi</span>
+          <span class="proj-tool">Data Migration</span>
+          <span class="proj-tool">ERP Integration</span>
+          <span class="proj-tool">SOPs</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-sector">Property & Construction</div>
+        <div class="proj-title">ERP Rollout Support — Watkins Jones Group</div>
+        <p class="proj-desc">Supported group-wide ERP enhancements and integrations across a large property development group. Introduced structured process documentation that reduced onboarding time and streamlined cross-team operations.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">ERP</span>
+          <span class="proj-tool">Dynamics 365</span>
+          <span class="proj-tool">Project Support</span>
+          <span class="proj-tool">Change Management</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-sector">Public Sector</div>
+        <div class="proj-title">IT Transformation — Federal Ministry of Environment</div>
+        <p class="proj-desc">Delivered business analysis for public sector IT transformation initiatives, translating requirements into functional solutions and maintaining system configuration documentation for compliance and continuity.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">Business Analysis</span>
+          <span class="proj-tool">Requirements</span>
+          <span class="proj-tool">IT Asset Mgmt</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-sector">Telecoms</div>
+        <div class="proj-title">Software Applications Analysis — Etisalat Nigeria</div>
+        <p class="proj-desc">Three years supporting software applications in a major telecoms environment. Application analysis, issue investigation and technical support across business-critical platforms at scale.</p>
+        <div class="proj-tools">
+          <span class="proj-tool">Application Support</span>
+          <span class="proj-tool">SQL</span>
+          <span class="proj-tool">ITSM</span>
+          <span class="proj-tool">Incident Management</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <span class="section-label">Skills &amp; Tools</span>
+    <h2>What I bring</h2>
+    <p class="section-sub">Across systems, data, process and delivery.</p>
+    <div class="skills-grid">
+      <div class="skill-block">
+        <div class="skill-category">Enterprise Systems</div>
+        <div class="skill-list">
+          <span class="skill-item">Oracle HRMS</span>
+          <span class="skill-item">Dynamics 365</span>
+          <span class="skill-item">Yardi</span>
+          <span class="skill-item">Workday</span>
+          <span class="skill-item">SAP &amp; Sage</span>
+          <span class="skill-item">Unit4</span>
+          <span class="skill-item">ESR (Electronic Staff Record)</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-category">Data &amp; Reporting</div>
+        <div class="skill-list">
+          <span class="skill-item">Excel (Advanced)</span>
+          <span class="skill-item">SQL &amp; T-SQL</span>
+          <span class="skill-item">Power BI</span>
+          <span class="skill-item">ESR Business Intelligence</span>
+          <span class="skill-item">Data Migration &amp; Validation</span>
+          <span class="skill-item">Workforce Reporting</span>
+        </div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-category">Analysis &amp; Delivery</div>
+        <div class="skill-list">
+          <span class="skill-item">Requirements Gathering (BRD, FRD)</span>
+          <span class="skill-item">User Stories &amp; Use Cases</span>
+          <span class="skill-item">UAT Planning &amp; Execution</span>
+          <span class="skill-item">Process Mapping (BPMN, Visio)</span>
+          <span class="skill-item">Agile (Scrum, Kanban)</span>
+          <span class="skill-item">Waterfall Delivery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- PROFILES -->
+<section id="profiles">
+  <div class="wrap">
+    <span class="section-label">Profiles &amp; Links</span>
+    <h2>Find me online</h2>
+    <p class="section-sub">Connect, read my writing, or view my professional profile.</p>
+    <div class="links-grid">
+      <a class="link-card" href="https://www.linkedin.com/in/peter-ade" target="_blank" rel="noopener">
+        <span class="link-card-label">Professional Network</span>
+        <span class="link-card-title">LinkedIn</span>
+        <span class="link-card-sub">linkedin.com/in/peter-ade</span>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a class="link-card" href="https://dev.to/peterola994" target="_blank" rel="noopener">
+        <span class="link-card-label">Technical Writing</span>
+        <span class="link-card-title">Dev.to</span>
+        <span class="link-card-sub">dev.to/peterola994</span>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+      <a class="link-card" href="mailto:peterola994@gmail.com">
+        <span class="link-card-label">Direct Contact</span>
+        <span class="link-card-title">Email</span>
+        <span class="link-card-sub">peterola994@gmail.com</span>
+        <span class="link-arrow">&#8599;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- AVAILABILITY -->
+<section id="contact">
+  <div class="wrap">
+    <div class="avail-box">
+      <div>
+        <div style="margin-bottom:16px"><span class="avail-dot"></span><span style="font-size:12px;color:#4CAF50;letter-spacing:0.1em;text-transform:uppercase">Available for contract &amp; roles</span></div>
+        <div class="avail-title">Let&rsquo;s work together</div>
+        <p class="avail-sub">Open to contract engagements, permanent roles, and consulting arrangements. Experienced working with HR teams, investment firms, financial services, NHS and real estate organisations. Based in London, available UK-wide and remotely.</p>
+      </div>
+      <div class="avail-actions">
+        <a href="mailto:peterola994@gmail.com" class="btn btn-solid" style="text-align:center">Send an email</a>
+        <a href="tel:+447442097126" class="btn btn-outline" style="text-align:center">+44 7442 097126</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <div class="footer-left">
+        Peter Ade &mdash; Business Systems Analyst &amp; IT Business Analyst<br/>
+        <span style="font-size:12px;color:var(--hint)">London, UK &bull; peterola994@gmail.com</span>
+      </div>
+      <div class="footer-right">CompTIA A+ &bull; CompTIA Security+ &bull; Agile &bull; Power BI</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
